@@ -4,8 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-  return  auth()->user()->roles;
-//    return view('welcome');
+    return view('welcome');
 });
 Route::middleware(['role:Admin'])->group(function () {
 Route::get('/dashboard', function () {
@@ -14,6 +13,7 @@ Route::get('/dashboard', function () {
 });
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('users', \App\Http\Controllers\UserController::class)->names('users');
+    Route::resource('products', \App\Http\Controllers\ProductController::class)->names('products');
 });
 
 Route::middleware('auth')->group(function () {
